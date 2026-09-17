@@ -226,28 +226,19 @@ function App() {
               <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
                 📅 Прогноз на 7 дней
               </h3>
-              <div className="space-y-3">
+              <div className="flex overflow-x-auto gap-3 pb-2 scrollbar-hide px-1">
                 {weather.daily.time.map((date, i) => {
                   const dayInfo = getWeatherInfo(weather.daily.weathercode[i]);
                   return (
-                    <div key={i} className="flex items-center justify-between text-white">
-                      <span className="w-16 text-sm font-medium">{getDayName(date, i)}</span>
-                      <span className="text-2xl">{dayInfo.icon}</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-white/60 text-sm">
-                          {Math.round(weather.daily.temperature_2m_min[i])}°
-                        </span>
-                        <div className="w-20 h-1.5 bg-white/20 rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-gradient-to-r from-blue-300 to-orange-400 rounded-full"
-                            style={{
-                              width: `${((weather.daily.temperature_2m_max[i] - weather.daily.temperature_2m_min[i]) / 40) * 100}%`,
-                              marginLeft: `${((weather.daily.temperature_2m_min[i] + 10) / 50) * 100}%`
-                            }}
-                          />
-                        </div>
-                        <span className="text-sm font-medium">
+                    <div key={i} className="flex flex-col items-center min-w-[80px] bg-white/10 rounded-xl p-3 text-white">
+                      <span className="text-xs font-medium mb-2">{getDayName(date, i)}</span>
+                      <span className="text-3xl my-2">{dayInfo.icon}</span>
+                      <div className="flex flex-col items-center gap-1 mt-2">
+                        <span className="text-sm font-semibold">
                           {Math.round(weather.daily.temperature_2m_max[i])}°
+                        </span>
+                        <span className="text-xs text-white/60">
+                          {Math.round(weather.daily.temperature_2m_min[i])}°
                         </span>
                       </div>
                     </div>
